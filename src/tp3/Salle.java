@@ -6,7 +6,8 @@ import java.util.List;
 import com.sun.org.apache.xpath.internal.axes.SelfIteratorNoPredicate;
 
 import observerPattern.Observer;
-public class Salle extends Observer {
+import observerPattern.Subject;
+public class Salle extends Subject implements Observer {
 	/**/
 	
 	//Server.getInstance() retourne un singleton, e.g. la Classe server a un patron de conception Singleton
@@ -16,8 +17,6 @@ public class Salle extends Observer {
 	int id;
 	int likeCount;
 	int dislikeCount;
-	ArrayList<User> suscribersList ;   
-	ArrayList<Messges> messagesList ;   
 	
 	//Constructeur pour reconstituer une salle déjà en mémoire
 	public Salle(String salleNom, int id, int likeCount, int dislikeCount, ArrayList<User> suscribersList, ArrayList<Messges> messagesList) {
@@ -25,8 +24,7 @@ public class Salle extends Observer {
 		this.id = id;
 		this.dislikeCount = dislikeCount;
 		this.likeCount = likeCount;
-		this.suscribersList = suscribersList;
-		this.messagesList = messagesList;
+
 		server = Server.getInstance();
 		
 	}
@@ -37,8 +35,6 @@ public class Salle extends Observer {
 		this.id = id;
 		this.dislikeCount = 0;
 		this.likeCount = 0;
-		this.suscribersList = new ArrayList<User>();
-		this.messagesList = new ArrayList<Messges>();
 		System.out.println("Salle créée:" + salleNom + " id:" + id);
 	}
 	
@@ -51,9 +47,49 @@ public class Salle extends Observer {
 	}
 	
 	public String toString() {
-		return salleNom + " id:" + id;
+		return salleNom + " id:" + id + "list suscriber:" + getSuscriberSalle().toString();
 	}
-	
+
+	public Server getServer() {
+		return server;
+	}
+
+	public void setServer(Server server) {
+		this.server = server;
+	}
+
+	public String getSalleNom() {
+		return salleNom;
+	}
+
+	public void setSalleNom(String salleNom) {
+		this.salleNom = salleNom;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getLikeCount() {
+		return likeCount;
+	}
+
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
+
+	public int getDislikeCount() {
+		return dislikeCount;
+	}
+
+	public void setDislikeCount(int dislikeCount) {
+		this.dislikeCount = dislikeCount;
+	}
+
 	
 
 }
